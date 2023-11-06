@@ -1,5 +1,13 @@
 import { useState } from 'react'
 
+//Aux method for getting a random int
+const getRandomInt = (max) => {
+  return Math.floor(Math.random() * max)
+}
+
+//Button component
+const Button = ({text,handler}) => <button onClick={handler}>{text}</button>
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -14,9 +22,17 @@ const App = () => {
    
   const [selected, setSelected] = useState(0)
 
+  const giveRandomAnecdote = () =>{
+    const num = getRandomInt(anecdotes.length)
+    //console.log(num)
+    setSelected(num)
+  }
+
   return (
     <div>
       {anecdotes[selected]}
+      <br />
+      <Button text={'Next anecdote'} handler={giveRandomAnecdote}/>
     </div>
   )
 }
